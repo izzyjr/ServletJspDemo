@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>Student!</h2>
 	<form action="getStudent">
 		<input type="text" name="studentId">
 		<input type="submit">

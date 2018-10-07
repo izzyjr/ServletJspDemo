@@ -13,7 +13,7 @@ public class StudentDao {
 	
 	public Student getStudent(int studentId) {
 		Student a = new Student();
-		a.setId(101);
+		a.setId(100);
 		a.setFirstName("Bill");
 		a.setLastName("White");
 		a.setEmail("billy@email.com");
