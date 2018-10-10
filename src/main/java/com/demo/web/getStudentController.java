@@ -16,6 +16,8 @@ import com.demo.web.model.Student;
  */
 public class getStudentController extends HttpServlet {
 	
+	StudentDao dao = new StudentDao();
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int studentId  = Integer.parseInt(request.getParameter("studentId"));
@@ -24,8 +26,7 @@ public class getStudentController extends HttpServlet {
 		request.setAttribute("student", a1);
 		RequestDispatcher rd = request.getRequestDispatcher("showStudent.jsp");
 		rd.forward(request, response);
-		
-		
+			
 	}
 
 }

@@ -6,6 +6,7 @@ package com.demo.web.dao;
 //import java.sql.Statement;
 
 import com.demo.web.model.Student;
+import java.sql.*;
 
 
 
@@ -13,10 +14,23 @@ public class StudentDao {
 	
 	public Student getStudent(int studentId) {
 		Student a = new Student();
-		a.setId(100);
-		a.setFirstName("Bill");
-		a.setLastName("White");
-		a.setEmail("billy@email.com");
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_student_tracker?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC", "webstudent", "webstudent");
+			Statement st = con.createStatement();
+			ResultSet  rs = st.executeQuery("select * from student where studentId=" + studentId);
+			if (rs.next()) {
+				a.setId(rs.getInt("id"));
+				a.setFirstName(rs.getString("first_name"));
+				a.setLastName(rs.getString("last_name"));
+				a.setEmail(rs.getString("email"));
+			}
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		
 		return a;
 	}
 	
@@ -34,7 +48,7 @@ public class StudentDao {
 //				studentId = Integer.parseInt(theStudentId);
 //				
 //				//get connection to database
-//				myConn = dataSource.getConnection();
+//				myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_student_tracker?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC", "webstudent", "webstudent");
 //				
 //				//create sql to get selected student
 //				String sql = "select * from student where id=?";
